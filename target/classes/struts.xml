@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+  "http://struts.apache.org/dtds/struts-2.3.dtd">
+<!--上传文件的大小-->
+
+<struts>
+  <!-- 禁用动态方法访问 -->
+  <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+  <!-- 配置成开发模式 -->
+  <constant name="struts.devMode" value="true"/>
+  <!-- 配置拓展名为action -->
+  <constant name="struts.action.extention" value="action"/>
+  <!-- 把主题配置成simple -->
+  <constant name="struts.ui.theme" value="simple"/>
+  <!--上传文件的大小-->
+  <constant name="struts.multipart.maxSize" value="209715200"/>
+  <package name="demo1" extends="struts-default" namespace="/">
+
+    <action name="user_*" class="cn.itcast.Action.UserAction" method="{1}">
+      <result name="login">/login.jsp</result>
+      <result name="loginsuccess">/index.htm</result>
+      <allowed-methods>login</allowed-methods>
+    </action>
+
+    <action name="customer_*" class="cn.itcast.Action.CustomerAction" method="{1}">
+      <result name="toAddPage">/jsp/customer/add.jsp</result>
+      <result name="add" type="redirectAction">customer_list</result>
+      <result name="list">/jsp/customer/list.jsp</result>
+      <result name="delete" type="redirectAction">customer_list</result>
+      <result name="showCustomer">/jsp/customer/edit.jsp</result>
+      <result name="update" type="redirectAction">customer_list</result>
+      <result name="listpage">/jsp/customer/listpage.jsp</result>
+      <result name="listCondition">/jsp/customer/list.jsp</result>
+      <result name="toSelectCustomerPage">/jsp/select/select.jsp</result>
+      <result name="moreCondition">/jsp/customer/list.jsp</result>
+      <result name="countSource">/jsp/customer/listSource.jsp</result>
+      <result name="countLevel">/jsp/customer/listLevel.jsp</result>
+      <allowed-methods>
+        add,toAddPage,list,delete,showCustomer,update,listpage,listCondition,toSelectCustomerPage,moreCondition,countSource,countLevel
+      </allowed-methods>
+    </action>
+
+    <action name="linkman_*" class="cn.itcast.Action.LinkManAction" method="{1}">
+      <result name="toAddPage">/jsp/linkman/add.jsp</result>
+      <result name="addLinkMan" type="redirectAction">linkman_list</result>
+      <!--      文件太大，返回错误页面-->
+      <result name="input">/jsp/error.jsp</result>
+      <result name="list">/jsp/linkman/list.jsp</result>
+      <result name="showLinkMan">/jsp/linkman/edit.jsp</result>
+      <result name="updateLinkMan" type="redirectAction">linkman_list</result>
+      <result name="toSelectPage">/jsp/select/linkman.jsp</result>
+      <result name="moreCondition">/jsp/linkman/list.jsp</result>
+      <result name="delete" type="redirectAction">linkman_list</result>
+      <allowed-methods>
+        toAddPage,addLinkMan,list,showLinkMan,updateLinkMan,toSelectPage,moreCondition,delete
+      </allowed-methods>
+    </action>
+
+    <action name="visit_*" class="cn.itcast.Action.VisistAction" method="{1}">
+      <result name="toAddPage">/jsp/visit/add.jsp</result>
+      <result name="addVisit">/jsp/success.jsp</result>
+      <result name="list">/jsp/visit/list.jsp</result>
+      <result name="toSelectPage">/jsp/select/visit.jsp</result>
+      <result name="moreCondition">/jsp/visit/list.jsp</result>
+      <allowed-methods>toAddPage,list,addVisit,toSelectPage,moreCondition</allowed-methods>
+    </action>
+  </package>
+</struts>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.itcast.domain">
+  <!--  取消懒加载，不然多次操作数据库会有no session的错误-->
+  <class name="Customer" table="t_customer" lazy="false">
+    <!--    主键-->
+    <id name="cid" column="cid">
+      <!--      自增长-->
+      <generator class="native"/>
+    </id>
+    <!--    普通属性-->
+    <property name="custMobile" column="custMobile"/>
+    <property name="custName" column="custName"/>
+    <property name="custPhone" column="custPhone"/>
+    <property name="custSource" column="custSource" />
+    <!--    inverse是否控制外键， cacade级联-->
+    <set name="setLinkMan" inverse="true" cascade="delete">
+      <!--      外键-->
+      <key column="clid"/>
+      <one-to-many class="LinkMan"/>
+    </set>
+    <!--    拜访和客户-->
+    <set name="setCusVisit">
+      <key column="cvid"/>
+      <one-to-many class="cn.itcast.domain.Visit"/>
+    </set>
+    <many-to-one name="custLevel" class="Dict" column="custLevel" />
+  </class>
+</hibernate-mapping>

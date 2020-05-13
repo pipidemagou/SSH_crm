@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="cn.itcast.domain.User" table="t_user" lazy="false">
+    <id name="id" column="uid">
+      <generator class="native"/>
+    </id>
+    <property name="password" column="password"/>
+    <property name="username" column="username"/>
+    <property name="address" column="address"/>
+    <!--  拜访和用户-->
+    <set name="setUserVisit">
+      <key column="uvid"/>
+      <one-to-many class="cn.itcast.domain.Visit"/>
+    </set>
+  </class>
+</hibernate-mapping>
